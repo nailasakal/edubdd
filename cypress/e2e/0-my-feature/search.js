@@ -1,3 +1,5 @@
+import SearchPage from "./search.page.js";
+
 const {
   Given,
   When,
@@ -7,14 +9,13 @@ const {
 Given("I open homepage", () => {
   cy.clearCookies();
   cy.clearLocalStorage();
-  cy.visit("http://zero.webappsecurity.com/index.html");
+  SearchPage.visit();
 });
 
 When("I type in the search field", () => {
-  cy.get("#searchTerm").type("online {enter}");
+  SearchPage.search();
 });
 
 Then("I should see search result", () => {
-  cy.get("a").should("contain.text", "Zero - Free Access to Online Banking");
-  cy.get("a").should("contain.text", "Zero - Online Statements");
+  SearchPage.assertSearchResult();
 });
